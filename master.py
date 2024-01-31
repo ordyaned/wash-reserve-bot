@@ -227,8 +227,16 @@ def cancel_reservation(message):
         return
     with sqlite3.connect(db) as conn:
         cursor = conn.cursor()
+        cursor.execute('SELECT date, start_time FROM reservations WHERE id = ?', (selected_reservation,))
+        date_to_cancel, time_to_cancel = cursor.fetchone()
         cursor.execute('DELETE FROM reservations WHERE id = ?', (selected_reservation,))
-        bot.send_message(message.chat.id, f'Reservation #{selected_reservation} has been successfully cancelled! \U0000274C')
+        bot.send_message(message.chat.id,
+                         f'Reservation #{selected_reservation} has been successfully cancelled! \U0000274C')
+        cursor.execute('SELECT distinct(user_id) FROM reservations')
+        active_users = cursor.fetchall()
+        for user in active_users:
+            bot.send_message(user[0], f"New reservation is available for {date_to_cancel} at {time_to_cancel}. \n"
+                                      f"HURRY UP \U0001F929 \U0001F929 \U0001F929")
         start(message)
         return
 
