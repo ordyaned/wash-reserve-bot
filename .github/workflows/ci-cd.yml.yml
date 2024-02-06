@@ -22,8 +22,9 @@ jobs:
     - name: Push the Docker image to Docker Hub
       run: docker push eordyan/ciup-wash-bot:${{ github.sha }}
 
-    - name: Set up kubeconfig
+    - name: Set up Kubeconfig
       run: |
+        mkdir -p $HOME/.kube
         echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
 
     - name: Deploy to Kubernetes
