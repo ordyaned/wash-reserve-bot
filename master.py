@@ -5,10 +5,12 @@ import tabulate
 from datetime import datetime, timedelta
 from telebot.types import ReplyKeyboardMarkup
 
-TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+TOKEN = '6453639963:AAG7QR5MH8PEYkxvlIxCN_5tTR1MRHNyUFo'
+# TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 bot = telebot.TeleBot(TOKEN)
 
-db = os.getenv('DB_PATH')
+db = 'data/reservations.db'
+# db = os.getenv('DB_PATH')
 
 # Conversation states
 MENU, DATE, TIME = range(3)
