@@ -13,6 +13,7 @@ bot = telebot.TeleBot(TOKEN)
 db = 'data/styleseat.db'
 # unavailability_db = 'data/styleseat.db'
 # db = os.getenv('DB_PATH')
+
 def init_db():
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
